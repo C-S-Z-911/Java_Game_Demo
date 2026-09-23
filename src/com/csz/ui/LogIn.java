@@ -33,7 +33,18 @@ public class LogIn {
      */
     private void login() {
         System.out.println("\n[====登录操作中====]");
-        System.out.println(list);
+        System.out.print("请输入用户名: ");
+        String userName = scanner.next();
+        User user = userTool.usernameExists(list, userName);
+        if(user != null){
+            for (int i = 0; i < 3; i++) {
+
+            }
+
+            System.out.println("\n[====登录成功====]");
+        }else{
+            System.out.println("\n[++++用户不存在++++]");
+        }
     }
 
     /**
@@ -48,7 +59,8 @@ public class LogIn {
         do {
             System.out.print("请输入用户名: ");
             userName = scanner.next();
-            if (userTool.verifyUserName(userName) && userTool.userUniqueness(list, userName)) {
+            User user = userTool.usernameExists(list, userName);
+            if (userTool.verifyUserName(userName) && user == null) {
                 break;
             } else {
                 System.out.println("用户名不符合规范");

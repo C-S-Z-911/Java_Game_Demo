@@ -47,17 +47,17 @@ public class userTool {
     }
 
     /**
-     * 验证用户名是否唯一
+     * 遍历list用户是否存在
      *
-     * @return 返回 布尔
+     * @return 返回 对应用户名数据
      */
-    public static boolean userUniqueness(ArrayList<User> list, String userName) {
+    public static User usernameExists(ArrayList<User> list, String userName) {
         for (User user : list) {
             if (user.getUserName().equals(userName)) {
-                return false;
+                return user;
             }
         }
-        return true;
+        return null;
     }
 
     /**
