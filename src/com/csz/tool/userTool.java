@@ -1,6 +1,6 @@
 package com.csz.tool;
 
-import com.csz.domain.User;
+import com.csz.model.User;
 
 import java.util.ArrayList;
 import java.util.Random;

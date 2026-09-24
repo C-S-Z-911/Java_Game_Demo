@@ -1,4 +1,4 @@
-package com.csz.domain;
+package com.csz.model;
 
 import com.csz.enums.Status;
 import com.csz.tool.userTool;

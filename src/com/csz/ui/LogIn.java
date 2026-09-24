@@ -1,6 +1,7 @@
 package com.csz.ui;
 
-import com.csz.domain.User;
+import com.csz.model.Player;
+import com.csz.model.User;
 import com.csz.enums.Status;
 import com.csz.tool.userTool;
 
@@ -18,8 +19,8 @@ public class LogIn {
         do {
             loginMenu();
             switch (scanner.next()) {
-                case "1" -> login();
-                case "2" -> register();
+                case "1" -> login(list);
+                case "2" -> register(list);
                 case "3" -> {
                     exitMenu();
                     return;
@@ -32,7 +33,7 @@ public class LogIn {
     /**
      * 登录操作
      */
-    private void login() {
+    private void login(ArrayList<User> list) {
         System.out.println("\n[====登录操作中====]");
         String userName;
         String password;
@@ -47,14 +48,14 @@ public class LogIn {
                     password = scanner.next();
                     if (user.getPassword().equals(password)) {
                         System.out.println("\n[====登录成功====]");
-                        gameStartup();
+                        gameStartup(user);
                         break;
                     } else if (i < 2) {
                         System.out.println("\n[++++登录失败请重试++++]");
                         System.out.println("[++++剩余" + (2 - i) + "次机会++++]");
                     } else {
                         System.out.println("\n[++++账户以管制++++]");
-                        user.setStatus(Status.CONTROL);
+                        user.setStatus(Status.LOCKED);
                     }
                 } else {
                     System.out.println("\n[++++账户角色以" + user.getStatus().getName() + "++++]");
@@ -69,18 +70,20 @@ public class LogIn {
     /**
      * 游戏启动操作
      */
-    private void gameStartup() {
+    private void gameStartup(User user) {
+        Game game = new Game();
+        Player player = new Player(user);
         System.out.println("\n[====游戏启动中====]");
+        game.gameBegins(player);
     }
 
     /**
      * 注册操作
      */
-    private void register() {
+    private void register(ArrayList<User> list) {
         System.out.println("\n[====注册操作中====]");
         String userName;
         String password;
-
 
         do {
             System.out.print("请输入用户名: ");
