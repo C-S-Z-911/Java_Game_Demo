@@ -1,6 +1,7 @@
 package com.csz.ui;
 
 import com.csz.domain.User;
+import com.csz.enums.Status;
 import com.csz.tool.userTool;
 
 import java.util.ArrayList;
@@ -8,11 +9,11 @@ import java.util.Scanner;
 
 public class LogIn {
     private final Scanner scanner = new Scanner(System.in);
-    private ArrayList<User> list = new ArrayList<>();
+    private final ArrayList<User> list = new ArrayList<>();
 
     /**
      * 开始
-     * */
+     */
     public void start() {
         do {
             loginMenu();
@@ -33,18 +34,43 @@ public class LogIn {
      */
     private void login() {
         System.out.println("\n[====登录操作中====]");
+        String userName;
+        String password;
+
         System.out.print("请输入用户名: ");
-        String userName = scanner.next();
+        userName = scanner.next();
         User user = userTool.usernameExists(list, userName);
-        if(user != null){
+        if (user != null) {
             for (int i = 0; i < 3; i++) {
-
+                if (user.getStatus().isLogin()) {
+                    System.out.print("请输入密码: ");
+                    password = scanner.next();
+                    if (user.getPassword().equals(password)) {
+                        System.out.println("\n[====登录成功====]");
+                        gameStartup();
+                        break;
+                    } else if (i < 2) {
+                        System.out.println("\n[++++登录失败请重试++++]");
+                        System.out.println("[++++剩余" + (2 - i) + "次机会++++]");
+                    } else {
+                        System.out.println("\n[++++账户以管制++++]");
+                        user.setStatus(Status.CONTROL);
+                    }
+                } else {
+                    System.out.println("\n[++++账户角色以" + user.getStatus().getName() + "++++]");
+                    break;
+                }
             }
-
-            System.out.println("\n[====登录成功====]");
-        }else{
+        } else {
             System.out.println("\n[++++用户不存在++++]");
         }
+    }
+
+    /**
+     * 游戏启动操作
+     */
+    private void gameStartup() {
+        System.out.println("\n[====游戏启动中====]");
     }
 
     /**
@@ -68,7 +94,6 @@ public class LogIn {
             }
         } while (true);
 
-
         do {
             do {
                 System.out.print("请输入密码: ");
@@ -88,7 +113,6 @@ public class LogIn {
             }
         } while (true);
 
-
         User user = new User(userName, password);
         list.add(user);
         System.out.println("\n[====注册成功====]");
@@ -97,7 +121,7 @@ public class LogIn {
     /**
      * 标题ui界面
      */
-    private void loginMenu() {
+    private static void loginMenu() {
         System.out.println("[------------------------]");
         System.out.println("[    欢迎来到文字格斗游戏    ]");
         System.out.println("[------------------------]");
@@ -107,7 +131,7 @@ public class LogIn {
     /**
      * 退出ui界面
      */
-    private void exitMenu() {
+    private static void exitMenu() {
         System.out.println("\n[----退出成功----]");
     }
 }
