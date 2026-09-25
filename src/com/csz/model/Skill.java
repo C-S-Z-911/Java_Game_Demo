@@ -1,21 +1,26 @@
 package com.csz.model;
 
 /**
- * 技能类
+ * 技能抽象类
  * */
-public class Skill {
+public abstract class Skill {
+    /**
+     * 技能名称
+    * */
     private String skillName;
-
+    /**
+     * 技能所有者
+     * */
     private Role owner;
-    private int consumptionMP;
+    /**
+     * 技能需求量
+     * */
+    private int demand;
 
-    public Skill() {
-    }
-
-    public Skill(String skillName, Role owner, int consumptionMP) {
+    public Skill(String skillName, Role owner, int demand) {
         this.skillName = skillName;
         this.owner = owner;
-        this.consumptionMP = consumptionMP;
+        this.demand = demand;
     }
 
     public String getSkillName() {
@@ -34,20 +39,21 @@ public class Skill {
         this.owner = owner;
     }
 
-    public int getConsumptionMP() {
-        return consumptionMP;
+    public int getDemand() {
+        return demand;
     }
 
-    public void setConsumptionMP(int consumptionMP) {
-        this.consumptionMP = consumptionMP;
+    public void setDemand(int demand) {
+        this.demand = demand;
     }
 
-    public void ability(Player player){
-        int remainingMP = player.getMP() - this.consumptionMP;
-        if(remainingMP> 0){
-            player.setMP(remainingMP);
-        }else{
-            player.setHP(player.getHP() - remainingMP);
-        }
+    public void demandMP() {
+        owner.consumptionMP(this.demand);
     }
+
+    public void demandHP() {
+        owner.consumptionHP(this.demand);
+    }
+
+    public abstract void ability(Enemy enemy);
 }
