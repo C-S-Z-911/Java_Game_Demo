@@ -9,7 +9,7 @@ public class Player extends Role{
         super(user.getUserName());
     }
 
-    public Player(String name, int HP, int maxHP, int MP, int maxMP, int ATK, int DEF) {
-        super(name, HP, maxHP, MP, maxMP, ATK, DEF);
+    public Player(User user, int HP, int maxHP, int MP, int maxMP, int ATK, int DEF) {
+        super(user.getUserName(), HP, maxHP, MP, maxMP, ATK, DEF);
     }
 }
