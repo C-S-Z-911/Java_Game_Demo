@@ -1,5 +1,7 @@
 package com.csz.model;
 
+import com.csz.enums.DemandAttribute;
+
 /**
  * 技能抽象类
  * */
@@ -8,19 +10,20 @@ public abstract class Skill {
      * 技能名称
     * */
     private String skillName;
-    /**
-     * 技能所有者
-     * */
-    private Role owner;
-    /**
-     * 技能需求量
-     * */
-    private int demand;
 
-    public Skill(String skillName, Role owner, int demand) {
+    /**
+     * 技能需求值
+     * */
+    private int demandValue;
+    /**
+     * 技能需求属性
+     * */
+    private DemandAttribute demandAttribute;
+
+    public Skill(String skillName, int demandValue, DemandAttribute demandAttribute) {
         this.skillName = skillName;
-        this.owner = owner;
-        this.demand = demand;
+        this.demandValue = demandValue;
+        this.demandAttribute = demandAttribute;
     }
 
     public String getSkillName() {
@@ -31,29 +34,21 @@ public abstract class Skill {
         this.skillName = skillName;
     }
 
-    public Role getOwner() {
-        return owner;
+    public int getDemandValue() {
+        return demandValue;
     }
 
-    public void setOwner(Role owner) {
-        this.owner = owner;
+    public void setDemandValue(int demandValue) {
+        this.demandValue = demandValue;
     }
 
-    public int getDemand() {
-        return demand;
+    public DemandAttribute getDemandAttribute() {
+        return demandAttribute;
     }
 
-    public void setDemand(int demand) {
-        this.demand = demand;
+    public void setDemandAttribute(DemandAttribute demandAttribute) {
+        this.demandAttribute = demandAttribute;
     }
 
-    public void demandMP() {
-        owner.consumptionMP(this.demand);
-    }
-
-    public void demandHP() {
-        owner.consumptionHP(this.demand);
-    }
-
-    public abstract void ability(Enemy enemy);
+    public abstract void ability(Role master,Role[] target);
 }

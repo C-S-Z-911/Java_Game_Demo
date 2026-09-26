@@ -15,7 +15,7 @@ public abstract class Role {
     /**
      * 技能
      */
-    private ArrayList<Skill> skillList;
+    private ArrayList<Skill> skillList = new ArrayList<>();
     /**
      * 血量
      */
@@ -43,7 +43,7 @@ public abstract class Role {
 
     public Role() {
         this.name = "NPC";
-        this.skillList.add(new CommonAttack(this));
+        this.skillList.add(new CommonAttack());
         this.HP = 50;
         this.maxHP = 50;
         this.MP = 50;
@@ -54,7 +54,7 @@ public abstract class Role {
 
     public Role(String name) {
         this.name = name;
-        this.skillList.add(new CommonAttack(this));
+        this.skillList.add(new CommonAttack());
         this.HP = 100;
         this.maxHP = 100;
         this.MP = 100;
@@ -65,7 +65,7 @@ public abstract class Role {
 
     public Role(String name, int HP, int maxHP, int MP, int maxMP, int ATK, int DEF) {
         this.name = name;
-        this.skillList.add(new CommonAttack(this));
+        this.skillList.add(new CommonAttack());
         this.HP = HP;
         this.maxHP = maxHP;
         this.MP = MP;
@@ -90,12 +90,17 @@ public abstract class Role {
         return skillList;
     }
 
-    public Skill useSkills(int a) {
-        return this.skillList.get(a);
+    /**
+     * 使用技能
+     */
+    public void useSkills(int a, Role[] target) {
+        this.skillList.get(a).ability(this, target);
     }
 
+    /**
+     * 添加技能
+     */
     public void addSkillList(Skill skill) {
-        skill.setOwner(this);
         this.skillList.add(skill);
     }
 
