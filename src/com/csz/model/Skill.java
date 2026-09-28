@@ -50,5 +50,5 @@ public abstract class Skill {
         this.demandAttribute = demandAttribute;
     }
 
-    public abstract void ability(Role master,Role[] target);
+    public abstract void ability(Role master,Role[] roles,int target);
 }

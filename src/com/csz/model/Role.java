@@ -93,8 +93,8 @@ public abstract class Role {
     /**
      * 使用技能
      */
-    public void useSkills(int a, Role[] target) {
-        this.skillList.get(a).ability(this, target);
+    public void useSkills(int a, Role[] roles, int target) {
+        this.skillList.get(a).ability(this, roles, target);
     }
 
     /**

@@ -14,7 +14,7 @@ public class CommonAttack extends Skill {
     }
 
     @Override
-    public void ability(Role master,Role[] target) {
-        target[0].consumptionHP(master.getATK()+10);
+    public void ability(Role master,Role[] roles,int target) {
+        roles[target].consumptionHP(master.getATK()+10);
     }
 }
