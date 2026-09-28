@@ -86,15 +86,27 @@ public abstract class Role {
         this.skillList = skillList;
     }
 
-    public ArrayList<Skill> getSkillList() {
-        return skillList;
+    /**
+     * 获取技能表
+     *
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getSkillNameList() {
+        ArrayList<String> skillNameList = new ArrayList<String>();
+        for (Skill skill : skillList) {
+            skillNameList.add(skill.getSkillName());
+        }
+
+        return skillNameList;
     }
 
     /**
      * 使用技能
      */
-    public void useSkills(int a, Role[] roles, int target) {
-        this.skillList.get(a).ability(this, roles, target);
+    public void useSkills(int skillSerialNumber, ArrayList<Role> roles, int target) {
+        Skill skill = this.skillList.get(skillSerialNumber);
+        consumptionMP(skill.getDemandValue());
+        skill.ability(this, roles, target);
     }
 
     /**
@@ -197,6 +209,8 @@ public abstract class Role {
 
     /**
      * 判断是否死亡
+     *
+     * @return 布尔
      */
     public boolean isDeath() {
         return this.HP <= 0;

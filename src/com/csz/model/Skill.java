@@ -2,6 +2,8 @@ package com.csz.model;
 
 import com.csz.enums.DemandAttribute;
 
+import java.util.ArrayList;
+
 /**
  * 技能抽象类
  * */
@@ -50,5 +52,8 @@ public abstract class Skill {
         this.demandAttribute = demandAttribute;
     }
 
-    public abstract void ability(Role master,Role[] roles,int target);
+    /**
+     * 能力效果
+     * */
+    public abstract void ability(Role master, ArrayList<Role> roles, int target);
 }

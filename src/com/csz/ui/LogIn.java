@@ -135,6 +135,6 @@ public class LogIn {
      * 退出ui界面
      */
     private static void exitMenu() {
-        System.out.println("\n[----退出成功----]");
+        System.out.println("\n[====退出成功====]");
     }
 }

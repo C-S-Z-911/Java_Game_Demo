@@ -4,6 +4,8 @@ import com.csz.enums.DemandAttribute;
 import com.csz.model.Role;
 import com.csz.model.Skill;
 
+import java.util.ArrayList;
+
 /**
  * 群体攻击技能
  * */
@@ -13,7 +15,7 @@ public class GroupAttack extends Skill {
     }
 
     @Override
-    public void ability(Role master,Role[] roles,int target) {
+    public void ability(Role master, ArrayList<Role> roles, int target) {
         for (Role role : roles) {
             role.consumptionHP(master.getATK());
         }
