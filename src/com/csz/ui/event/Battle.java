@@ -1,11 +1,11 @@
 package com.csz.ui.event;
 
-import com.csz.model.Enemy;
 import com.csz.model.Player;
 import com.csz.model.Role;
-import com.csz.model.Skill;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -38,14 +38,27 @@ public class Battle {
             for (Role enemy : roleList) {
                 roleAttributeUI(enemy);
             }
-            operationUI();
+            playerTurnUI();
+            enemyTurn();
+            System.out.println("[输入任意键继续: ]");
+            scanner.next();
+            System.out.println();
         } while (true);
     }
+
+    public void enemyTurn() {
+        Random random = new Random();
+        for(Role role : roleList){
+            int skillSerialNumber = random.nextInt(role.getSkillNameList().size());
+            role.useSkills(skillSerialNumber,new ArrayList<Role>(List.of(player)),0);
+        }
+    }
+
 
     /**
      * 操作界面ui
      */
-    public void operationUI() {
+    public void playerTurnUI() {
         do {
             System.out.println("[----操 作----]");
             System.out.println("[0]使用技能");

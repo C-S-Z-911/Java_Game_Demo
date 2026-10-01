@@ -107,6 +107,7 @@ public abstract class Role {
         Skill skill = this.skillList.get(skillSerialNumber);
         consumptionMP(skill.getDemandValue());
         skill.ability(this, roles, target);
+        System.out.println("["+this.name+" - 使用技能: "+skill.getSkillName()+"]");
     }
 
     /**
