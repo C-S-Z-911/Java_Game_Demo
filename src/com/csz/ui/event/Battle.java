@@ -29,12 +29,19 @@ public class Battle {
     /**
      * 遭遇战
      */
-    public void encounterBattle() {
+    public boolean encounterBattle() {
         System.out.println("\n[====遭 遇 战====]");
-
+        boolean victory;
         do {
             roleAttributeUI(player);
-            if (roleList.size() == 0) break;
+            if (roleList.size() == 0) {
+                victory = true;
+                break;
+            }
+            if (player.isDeath()) {
+                victory = false;
+                break;
+            }
             for (Role enemy : roleList) {
                 roleAttributeUI(enemy);
             }
@@ -44,13 +51,21 @@ public class Battle {
             scanner.next();
             System.out.println();
         } while (true);
+
+        if(victory){
+            System.out.println("[====胜 利====]");
+        }else{
+            System.out.println("[====失 败====]");
+        }
+
+        return victory;
     }
 
     public void enemyTurn() {
         Random random = new Random();
-        for(Role role : roleList){
+        for (Role role : roleList) {
             int skillSerialNumber = random.nextInt(role.getSkillNameList().size());
-            role.useSkills(skillSerialNumber,new ArrayList<Role>(List.of(player)),0);
+            role.useSkills(skillSerialNumber, new ArrayList<Role>(List.of(player)), 0);
         }
     }
 

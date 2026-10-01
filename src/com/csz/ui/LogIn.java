@@ -16,10 +16,14 @@ public class LogIn {
      * 开始
      */
     public void start() {
+        outer:
         do {
             loginMenu();
             switch (scanner.next()) {
-                case "1" -> login(list);
+                case "1" -> {
+                    login(list);
+                    break outer;
+                }
                 case "2" -> register(list);
                 case "3" -> {
                     exitMenu();
@@ -75,6 +79,8 @@ public class LogIn {
         Player player = new Player(user);
         System.out.println("\n[====游戏启动中====]");
         game.gameBegins(player);
+
+
     }
 
     /**
