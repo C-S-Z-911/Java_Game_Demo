@@ -57,6 +57,8 @@ public class Battle {
         }else{
             System.out.println("[====失 败====]");
         }
+        System.out.println("[输入任意键继续: ]");
+        scanner.next();
 
         return victory;
     }

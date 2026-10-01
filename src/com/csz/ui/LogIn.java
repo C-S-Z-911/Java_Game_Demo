@@ -20,10 +20,7 @@ public class LogIn {
         do {
             loginMenu();
             switch (scanner.next()) {
-                case "1" -> {
-                    login(list);
-                    break outer;
-                }
+                case "1" -> login(list);
                 case "2" -> register(list);
                 case "3" -> {
                     exitMenu();
@@ -79,8 +76,7 @@ public class LogIn {
         Player player = new Player(user);
         System.out.println("\n[====游戏启动中====]");
         game.gameBegins(player);
-
-
+        System.out.println("\n[====游戏结束====]");
     }
 
     /**

@@ -17,9 +17,13 @@ import java.util.List;
 public class Game {
     public void gameBegins(Player player){
         //战斗
-        ArrayList<Role> roles = new ArrayList<Role>(List.of(new Enemy("小怪1"), new Enemy("小怪2"), new Enemy("小怪3")));
-        Battle battle = new Battle(player, roles);
 
-        battle.encounterBattle();
+
+
+        while (!player.isDeath()){
+            ArrayList<Role> roles = new ArrayList<Role>(List.of(new Enemy("小怪1"), new Enemy("小怪2"), new Enemy("小怪3")));
+            Battle battle = new Battle(player, roles);
+            battle.encounterBattle();
+        }
     }
 }
