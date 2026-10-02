@@ -46,15 +46,25 @@ public class Battle {
                 roleAttributeUI(enemy);
             }
             playerTurnUI();
+
+            for (int i = 0; i < roleList.size(); ) {
+                if (roleList.get(i).isDeath()) {
+                    System.out.println("[" + roleList.get(i).getName() + ": 死亡]");
+                    roleList.remove(i);
+                } else {
+                    i++;
+                }
+            }
+
             enemyTurn();
             System.out.println("[输入任意键继续: ]");
             scanner.next();
             System.out.println();
         } while (true);
 
-        if(victory){
+        if (victory) {
             System.out.println("[====胜 利====]");
-        }else{
+        } else {
             System.out.println("[====失 败====]");
         }
         System.out.println("[输入任意键继续: ]");
@@ -106,7 +116,7 @@ public class Battle {
 
             try {
                 int skillSerialNumber = Integer.parseInt(scanner.next());
-                if (skillSerialNumber >= 0 && skillSerialNumber <= skillList.size()) {
+                if (skillSerialNumber >= 0 && skillSerialNumber < skillList.size()) {
 
                     //目标选择
                     do {
@@ -116,7 +126,7 @@ public class Battle {
                         }
 
                         int target = Integer.parseInt(scanner.next());
-                        if (target >= 0 && target <= roleList.size()) {
+                        if (target >= 0 && target < roleList.size()) {
                             player.useSkills(skillSerialNumber, roleList, target);
                             break;
                         }
@@ -130,16 +140,6 @@ public class Battle {
                 System.out.println("\n[++++请输入正确数据++++]");
             }
         } while (true);
-
-        for (int i = 0; i < roleList.size(); ) {
-            if (roleList.get(i).isDeath()) {
-                System.out.println("[" + roleList.get(i).getName() + ": 死亡]");
-                roleList.remove(i);
-            } else {
-                i++;
-            }
-        }
-
     }
 
     /**

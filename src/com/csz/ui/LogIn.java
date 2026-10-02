@@ -16,7 +16,6 @@ public class LogIn {
      * 开始
      */
     public void start() {
-        outer:
         do {
             loginMenu();
             switch (scanner.next()) {

@@ -12,15 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* 游戏本体
-* */
+ * 游戏本体
+ */
 public class Game {
-    public void gameBegins(Player player){
+    public void gameBegins(Player player) {
         //战斗
 
 
-
-        while (!player.isDeath()){
+        while (!player.isDeath()) {
             ArrayList<Role> roles = new ArrayList<Role>(List.of(new Enemy("小怪1"), new Enemy("小怪2"), new Enemy("小怪3")));
             Battle battle = new Battle(player, roles);
             battle.encounterBattle();
